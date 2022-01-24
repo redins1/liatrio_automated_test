@@ -1,4 +1,4 @@
-#Command: pytest ./test.py --base-url <url> -sv --html report.html
+#Command: pytest ./test.py --base-url URL -sv --html report.html
 import os
 import requests
 import json

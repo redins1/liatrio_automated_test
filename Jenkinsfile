@@ -3,11 +3,11 @@ pipeline {
     stages {
         stage('Setup parameters') {
             steps {
-                script { 
+                script {
                     properties([
                         parameters([
-                            string( 
-                                defaultValue: 'http://<URL>:<PORT>',
+                            string(
+                                defaultValue: 'http://URL:PORT',
                                 name: 'URL',
                                 trim: true
                             )
@@ -18,7 +18,10 @@ pipeline {
         }
         stage('Run Test') {
             steps {
-                sh 'export URL=params.URL && pytest ./test.py  -sv --html report.html'
+                sh (script: """
+                export URL=${params.URL}
+                pytest ./test.py -sv --html report.html
+                """)
             }
         }
     }
