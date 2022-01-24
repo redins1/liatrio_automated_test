@@ -1,4 +1,5 @@
-#Command: pytest .\test.py -sv --html report.html
+#Command: pytest ./test.py --base-url <url> -sv --html report.html
+import os
 import requests
 import json
 from jsonschema import validate
@@ -15,7 +16,7 @@ schema = {
 }
 
 def test_validate_rest_api_working():
-     response = requests.get("http://localhost:3000")
+     response = requests.get(os.environ.get("URL"))
      #Ensure the application is up and responds appropriately
      assert response.status_code == 200
      #Ensure correct Content-Type is set
